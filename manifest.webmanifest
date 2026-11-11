@@ -1,0 +1,9 @@
+{
+  "name": "Mis Horas Gym",
+  "short_name": "Horas Gym",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#160e25",
+  "theme_color": "#24143d",
+  "description": "Control de horas trabajadas y sueldo"
+}

@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#24143d">
+<meta name="description" content="Controlá tus horas trabajadas y calculá tu sueldo.">
+<link rel="manifest" href="manifest.webmanifest">
+<title>Mis Horas Gym</title>
+<style>
+:root{color-scheme:dark;--bg:#160e25;--panel:#241735;--panel2:#302044;--accent:#b68cff;--accent2:#8d5ce6;--text:#f5efff;--muted:#b9a9cc;--green:#8ce0b1;--red:#ff9eae}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#392252 0,#160e25 55%);font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:var(--text);min-height:100vh}
+main{max-width:620px;margin:auto;padding:22px 16px 40px}.top{display:flex;align-items:center;gap:12px;margin:8px 0 22px}.logo{width:48px;height:48px;border-radius:16px;background:linear-gradient(145deg,#bd94ff,#7544c4);display:grid;place-items:center;font-size:25px;box-shadow:0 8px 24px #0005}
+h1{font-size:22px;margin:0}.sub{color:var(--muted);font-size:13px;margin-top:3px}
+.card{background:#241735eF;border:1px solid #ffffff12;border-radius:20px;padding:17px;margin:13px 0;box-shadow:0 12px 28px #0002}
+.eyebrow{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.08em}.money{font-size:34px;font-weight:800;letter-spacing:-1px;margin:4px 0;color:var(--green)}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{background:var(--panel2);padding:13px;border-radius:15px}.stat b{font-size:22px;display:block;margin-top:4px}.stat small{color:var(--muted)}
+h2{font-size:16px;margin:0 0 14px}label{display:block;color:var(--muted);font-size:13px;margin:12px 0 6px}
+input,select{width:100%;background:#160e25;border:1px solid #59466f;color:var(--text);padding:12px;border-radius:12px;font-size:16px;outline:none}
+input:focus,select:focus{border-color:var(--accent)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+button{border:0;border-radius:13px;padding:13px 15px;font-size:15px;font-weight:700;cursor:pointer}
+.primary{width:100%;background:linear-gradient(100deg,#b68cff,#8755d6);color:#190d2b;margin-top:16px}
+.secondary{background:#3b2a50;color:var(--text)}.danger{background:#4a263c;color:#ffbdca;padding:8px 10px;font-size:12px}
+.entry{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #ffffff12}.entry:last-child{border:0}.entry strong{display:block}.entry small{color:var(--muted)}
+.amount{font-weight:700;color:var(--green);white-space:nowrap}.empty{color:var(--muted);font-size:14px;text-align:center;padding:18px 5px}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap}.toolbar button{flex:1}.note{font-size:12px;color:var(--muted);line-height:1.5;margin:12px 2px}
+footer{text-align:center;color:var(--muted);font-size:11px;padding:12px}
+@media(max-width:370px){.row{grid-template-columns:1fr}.money{font-size:29px}}
+</style>
+</head>
+<body>
+<main>
+ <header class="top"><div class="logo">⏱</div><div><h1>Mis Horas Gym</h1><div class="sub">Tus horas, tus cuentas, todo claro 💜</div></div></header>
+ <section class="card">
+  <div class="eyebrow" id="monthTitle">Total del mes</div>
+  <div class="money" id="monthMoney">$0</div>
+  <div class="stats">
+   <div class="stat"><small>Horas totales</small><b id="monthHours">0 h</b></div>
+   <div class="stat"><small>Horas normales</small><b id="normalHours">0 h</b></div>
+   <div class="stat"><small>Reemplazos</small><b id="replacementHours">0 h</b></div>
+   <div class="stat"><small>Pago por hora</small><b id="rateLabel">$3.000</b></div>
+  </div>
+ </section>
+ <section class="card">
+  <h2>＋ Anotar horas</h2>
+  <div class="row">
+   <div><label for="date">Fecha</label><input id="date" type="date"></div>
+   <div><label for="hours">Cantidad de horas</label><input id="hours" type="number" min="0.5" step="0.5" placeholder="Ej. 2"></div>
+  </div>
+  <label for="kind">Tipo de horas</label>
+  <select id="kind"><option value="Normal">Normal</option><option value="Reemplazo">Reemplazo</option></select>
+  <label for="detail">Detalle (opcional)</label><input id="detail" maxlength="80" placeholder="Ej. Reemplazo de Axel">
+  <button class="primary" id="add">Guardar registro</button>
+ </section>
+ <section class="card">
+  <h2>⚙️ Configuración</h2>
+  <label for="rate">Pago por hora ($)</label><input id="rate" type="number" min="0" step="100" value="3000">
+  <label for="month">Consultar otro mes</label><input id="month" type="month">
+  <p class="note">El pago se calcula multiplicando las horas registradas por el valor por hora. Cambiar el valor actualiza también los totales de los meses anteriores.</p>
+ </section>
+ <section class="card">
+  <h2>📋 Registros del mes</h2>
+  <div id="entries"><div class="empty">Todavía no hay horas anotadas en este mes.</div></div>
+ </section>
+ <section class="card">
+  <h2>Respaldo de tus datos</h2>
+  <div class="toolbar"><button class="secondary" id="export">Exportar copia</button><button class="secondary" id="importBtn">Importar copia</button></div>
+  <input id="file" type="file" accept="application/json" hidden>
+  <p class="note">Tus registros quedan guardados en este navegador y en este teléfono. Exportá una copia de vez en cuando para no perderlos si borrás los datos del navegador.</p>
+ </section>
+ <footer>Mis Horas Gym · Hecho para llevar tus cuentas con tranquilidad.</footer>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const today=new Date(), localDate=new Date(today.getTime()-today.getTimezoneOffset()*60000).toISOString().slice(0,10);
+$('date').value=localDate;$('month').value=localDate.slice(0,7);
+let records=[];let rate=3000;
+try{records=JSON.parse(localStorage.getItem('mhg_records')||'[]');rate=Number(localStorage.getItem('mhg_rate')||3000)}catch(e){}
+$('rate').value=rate;
+const money=n=>n.toLocaleString('es-AR',{style:'currency',currency:'ARS',maximumFractionDigits:0});
+const save=()=>{localStorage.setItem('mhg_records',JSON.stringify(records));localStorage.setItem('mhg_rate',String(rate))};
+function render(){
+ const month=$('month').value||localDate.slice(0,7), list=records.filter(r=>r.date.startsWith(month));
+ const normal=list.filter(r=>r.kind==='Normal').reduce((a,r)=>a+r.hours,0);
+ const repl=list.filter(r=>r.kind==='Reemplazo').reduce((a,r)=>a+r.hours,0);
+ const total=normal+repl;
+ $('monthTitle').textContent='Total de '+month;
+ $('monthMoney').textContent=money(total*rate);
+ $('monthHours').textContent=total+' h';$('normalHours').textContent=normal+' h';$('replacementHours').textContent=repl+' h';$('rateLabel').textContent=money(rate);
+ $('entries').innerHTML='';
+ if(!list.length){$('entries').innerHTML='<div class="empty">Todavía no hay horas anotadas en este mes.</div>';return}
+ list.slice().sort((a,b)=>b.date.localeCompare(a.date)||b.id-a.id).forEach(r=>{
+  const el=document.createElement('div');el.className='entry';
+  const left=document.createElement('div'),right=document.createElement('div');
+  const strong=document.createElement('strong');strong.textContent=r.date+' · '+r.hours+' h';
+  const small=document.createElement('small');small.textContent=r.kind+(r.detail?' · '+r.detail:'');
+  left.append(strong,small);
+  const amt=document.createElement('div');amt.className='amount';amt.textContent=money(r.hours*rate);
+  const del=document.createElement('button');del.className='danger';del.textContent='Borrar';del.setAttribute('aria-label','Borrar registro');
+  del.onclick=()=>{if(confirm('¿Borrar este registro?')){records=records.filter(x=>x.id!==r.id);save();render()}};
+  right.append(amt,del);el.append(left,right);$('entries').append(el);
+ });
+}
+$('add').onclick=()=>{
+ const date=$('date').value,hours=Number($('hours').value),kind=$('kind').value,detail=$('detail').value.trim();
+ if(!date||!Number.isFinite(hours)||hours<=0){alert('Ingresá una fecha y una cantidad de horas válida.');return}
+ records.push({id:Date.now()+Math.random(),date,hours,kind,detail});save();$('hours').value='';$('detail').value='';$('month').value=date.slice(0,7);render();
+};
+$('rate').onchange=()=>{rate=Math.max(0,Number($('rate').value)||0);$('rate').value=rate;save();render()};
+$('month').onchange=render;
+$('export').onclick=()=>{const blob=new Blob([JSON.stringify({rate,records},null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='mis-horas-gym-respaldo.json';a.click();URL.revokeObjectURL(a.href)};
+$('importBtn').onclick=()=>$('file').click();
+$('file').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const data=JSON.parse(await f.text());if(!Array.isArray(data.records))throw Error();if(confirm('Esto reemplazará los registros actuales. ¿Continuar?')){records=data.records;rate=Number(data.rate)||3000;$('rate').value=rate;save();render();alert('Copia importada correctamente.')}}catch(err){alert('No se pudo leer esa copia.')}e.target.value=''};
+if('serviceWorker' in navigator && location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
+render();
+</script>
+</body></html>
