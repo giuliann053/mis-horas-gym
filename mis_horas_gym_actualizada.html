@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#24143d">
+<meta name="description" content="Controlá tus horas trabajadas y calculá tu sueldo.">
+<title>Mis Horas Gym</title>
+<style>
+:root{color-scheme:dark;--bg:#160e25;--panel:#241735;--panel2:#302044;--accent:#b68cff;--accent2:#8d5ce6;--text:#f5efff;--muted:#b9a9cc;--green:#8ce0b1;--red:#ff9eae;--surface-image:none;--overlay:.28}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#392252 0,#160e25 55%);font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:var(--text);min-height:100vh;background-image:linear-gradient(#160e25cc,#160e25dd),var(--surface-image);background-size:cover;background-position:center;background-attachment:fixed}
+main{max-width:620px;margin:auto;padding:18px 16px 40px}.top{display:flex;align-items:center;gap:12px;margin:5px 0 18px}.logo{width:48px;height:48px;border-radius:16px;background:linear-gradient(145deg,#bd94ff,#7544c4);display:grid;place-items:center;font-size:25px;box-shadow:0 8px 24px #0005;overflow:hidden;flex:none}.logo img{width:100%;height:100%;object-fit:cover}
+.brand{min-width:0;flex:1}h1{font-size:21px;margin:0;overflow-wrap:anywhere}.sub{color:var(--muted);font-size:13px;margin-top:3px}.menu-wrap{position:relative}.dots{width:42px;height:42px;padding:0;border-radius:14px;background:#ffffff12;color:var(--text);font-size:23px}.menu{display:none;position:absolute;right:0;top:48px;z-index:20;min-width:190px;padding:7px;background:#21152f;border:1px solid #ffffff22;border-radius:15px;box-shadow:0 15px 35px #0008}.menu.open{display:block}.menu button{width:100%;text-align:left;background:transparent;color:var(--text);padding:12px;border-radius:10px;font-size:14px}.menu button:active{background:#ffffff16}
+.card{background:#241735eF;border:1px solid #ffffff12;border-radius:20px;padding:17px;margin:13px 0;box-shadow:0 12px 28px #0002;position:relative;overflow:hidden}.hero{background:linear-gradient(135deg,#35224fdd,#21152fee),var(--hero-image,none);background-size:cover;background-position:center}.hero.foreground:before{content:"";position:absolute;inset:0;background:var(--hero-image) center/cover no-repeat;opacity:var(--overlay);pointer-events:none}.hero>*{position:relative;z-index:1}
+.clockline{display:flex;align-items:center;gap:12px;margin-bottom:13px}.clockphoto{width:54px;height:54px;border-radius:17px;object-fit:cover;background:#ffffff16;display:none}.clockphoto.visible{display:block}.clock{font-size:24px;font-weight:750;letter-spacing:.02em}.date-label{color:var(--muted);font-size:12px}.eyebrow{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.08em}.money{font-size:34px;font-weight:800;letter-spacing:-1px;margin:4px 0;color:var(--green)}.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{background:var(--panel2);padding:13px;border-radius:15px;min-width:0}.stat b{font-size:22px;display:block;margin-top:4px}.stat small{color:var(--muted)}h2{font-size:16px;margin:0 0 14px}label{display:block;color:var(--muted);font-size:13px;margin:12px 0 6px}
+input,select{width:100%;background:#160e25;border:1px solid #59466f;color:var(--text);padding:12px;border-radius:12px;font-size:16px;outline:none}input:focus,select:focus{border-color:var(--accent)}input[type=file]{font-size:13px;padding:9px}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}button{border:0;border-radius:13px;padding:13px 15px;font-size:15px;font-weight:700;cursor:pointer}.primary{width:100%;background:linear-gradient(100deg,#b68cff,#8755d6);color:#190d2b;margin-top:16px}.secondary{background:#3b2a50;color:var(--text)}.danger{background:#4a263c;color:#ffbdca;padding:8px 10px;font-size:12px}.entry{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #ffffff12}.entry:last-child{border:0}.entry strong{display:block}.entry small{color:var(--muted)}.amount{font-weight:700;color:var(--green);white-space:nowrap}.empty{color:var(--muted);font-size:14px;text-align:center;padding:18px 5px}.toolbar{display:flex;gap:8px;flex-wrap:wrap}.toolbar button{flex:1}.note{font-size:12px;color:var(--muted);line-height:1.5;margin:12px 2px}footer{text-align:center;color:var(--muted);font-size:11px;padding:12px}
+.panel-hidden{display:none!important}.screen-title{display:flex;align-items:center;gap:10px;margin:8px 0 16px}.back{background:#ffffff12;color:var(--text);padding:9px 12px}.preview{border:1px dashed #8b70a8;border-radius:17px;padding:12px;margin-top:12px}.preview-card{border-radius:14px;padding:13px;background:linear-gradient(135deg,#35224f,#21152f);min-height:120px;background-size:cover;background-position:center}.preview-time{font-size:22px;font-weight:800}.preview-stats{display:flex;gap:8px;margin-top:10px}.preview-stats span{background:#ffffff20;padding:8px;border-radius:9px;font-size:12px}.designs{display:grid;grid-template-columns:1fr 1fr;gap:9px}.design{border:1px solid #ffffff20;border-radius:13px;padding:10px;background:#ffffff08;text-align:left;color:var(--text)}.design.active{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}.swatch{height:34px;border-radius:8px;margin-bottom:7px}.muted{color:var(--muted);font-size:12px}
+@media(max-width:370px){.row{grid-template-columns:1fr}.money{font-size:29px}.designs{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main id="home">
+ <header class="top">
+  <div class="logo" id="appLogo">⏱</div>
+  <div class="brand"><h1 id="appName">Mis Horas Gym</h1><div class="sub">Tus horas, tus cuentas, todo claro 💜</div></div>
+  <div class="menu-wrap"><button class="dots" id="menuBtn" aria-label="Abrir menú" aria-expanded="false">⋮</button><nav class="menu" id="menu"><button id="personalizationBtn">🎨 Personalización</button><button id="dataBtn">📦 Importar / exportar datos</button></nav></div>
+ </header>
+ <section class="card hero" id="heroCard">
+  <div class="clockline"><img id="clockPhoto" class="clockphoto" alt="Foto elegida"><div><div class="clock" id="clock">00:00:00</div><div class="date-label" id="todayLabel"></div></div></div>
+  <div class="eyebrow" id="monthTitle">Total del mes</div><div class="money" id="monthMoney">$0</div>
+  <div class="stats">
+   <div class="stat"><small>Horas totales</small><b id="monthHours">0 h</b></div>
+   <div class="stat"><small>Horas normales</small><b id="normalHours">0 h</b></div>
+   <div class="stat"><small>Reemplazos</small><b id="replacementHours">0 h</b></div>
+   <div class="stat"><small>Pago por hora</small><b id="rateLabel">$3.000</b></div>
+  </div>
+ </section>
+ <section class="card">
+  <h2>＋ Anotar horas</h2>
+  <div class="row"><div><label for="date">Fecha</label><input id="date" type="date"></div><div><label for="hours">Cantidad de horas</label><input id="hours" type="number" min="0.5" step="0.5" placeholder="Ej. 2"></div></div>
+  <label for="kind">Tipo de horas</label><select id="kind"><option value="Normal">Normal</option><option value="Reemplazo">Reemplazo</option></select>
+  <label for="detail">Detalle (opcional)</label><input id="detail" maxlength="80" placeholder="Ej. Reemplazo de un compañero">
+  <button class="primary" id="add">Guardar registro</button>
+ </section>
+ <section class="card"><h2>📋 Registros del mes</h2><div class="row"><div><label for="month">Consultar otro mes</label><input id="month" type="month"></div></div><div id="entries"><div class="empty">Todavía no hay horas anotadas en este mes.</div></div></section>
+ <footer id="footerName">Mis Horas Gym · Tus datos quedan en este dispositivo.</footer>
+</main>
+
+<section id="personalization" class="panel-hidden" style="max-width:620px;margin:auto;padding:18px 16px 40px">
+ <div class="screen-title"><button class="back" id="backHome">← Volver</button><h1>🎨 Personalización</h1></div>
+ <section class="card">
+  <h2>Identidad de la aplicación</h2><label for="customName">Nombre de la aplicación</label><input id="customName" maxlength="32" placeholder="Mis Horas Gym">
+  <label for="photoFile">Foto junto al reloj y las horas</label><input id="photoFile" type="file" accept="image/*"><div class="muted">La imagen se guarda localmente en este dispositivo.</div>
+ </section>
+ <section class="card">
+  <h2>Diseño de la pantalla principal</h2><div class="designs">
+   <button class="design" data-design="purple"><div class="swatch" style="background:linear-gradient(120deg,#392252,#160e25)"></div><b>Violeta</b><div class="muted">Clásico y oscuro</div></button>
+   <button class="design" data-design="minimal"><div class="swatch" style="background:linear-gradient(120deg,#263344,#101820)"></div><b>Minimalista</b><div class="muted">Ordenado y limpio</div></button>
+   <button class="design" data-design="futuristic"><div class="swatch" style="background:linear-gradient(120deg,#073c48,#101a35)"></div><b>Futurista</b><div class="muted">Brillos tecnológicos</div></button>
+   <button class="design" data-design="formal"><div class="swatch" style="background:linear-gradient(120deg,#343434,#151515)"></div><b>Formal</b><div class="muted">Sobrio y elegante</div></button>
+  </div>
+  <label for="bgFile">Imagen de fondo de toda la aplicación</label><input id="bgFile" type="file" accept="image/*">
+  <label for="heroFile">Imagen en primer plano o fondo de la tarjeta de horas</label><input id="heroFile" type="file" accept="image/*">
+  <label for="imageMode">Cómo mostrar la imagen en la tarjeta de horas</label><select id="imageMode"><option value="background">Como fondo</option><option value="foreground">En primer plano, superpuesta</option></select>
+  <label for="opacity">Intensidad de la imagen</label><input id="opacity" type="range" min="0.05" max="0.8" step="0.05" value="0.28">
+  <div class="preview"><b>Vista previa</b><div class="preview-card" id="previewCard"><div class="preview-time">10:35:42</div><div class="muted">Total del mes · $24.000</div><div class="preview-stats"><span>8 h totales</span><span>2 reemplazos</span></div></div><div class="muted" style="margin-top:8px">Así se verá la tarjeta principal con el diseño seleccionado.</div></div>
+ </section>
+ <button class="primary" id="savePersonalization">Guardar personalización</button>
+</section>
+
+<section id="dataPanel" class="panel-hidden" style="max-width:620px;margin:auto;padding:18px 16px 40px">
+ <div class="screen-title"><button class="back" id="backData">← Volver</button><h1>📦 Tus datos</h1></div>
+ <section class="card"><h2>Importar o exportar registros</h2><div class="toolbar"><button class="secondary" id="export">Exportar copia</button><button class="secondary" id="importBtn">Importar copia</button></div><input id="file" type="file" accept="application/json" hidden><p class="note">Los registros se guardan en este dispositivo. Podés exportar un archivo para conservar una copia o importarlo más adelante. No se conecta con Google ni solicita acceso a cuentas.</p></section>
+</section>
+
+<script>
+const $=id=>document.getElementById(id);
+const today=new Date(), localDate=new Date(today.getTime()-today.getTimezoneOffset()*60000).toISOString().slice(0,10);
+$('date').value=localDate;$('month').value=localDate.slice(0,7);
+let records=[],rate=3000,settings={name:'Mis Horas Gym',design:'purple',photo:'',background:'',hero:'',imageMode:'background',opacity:.28};
+try{records=JSON.parse(localStorage.getItem('mhg_records')||'[]');rate=Number(localStorage.getItem('mhg_rate')||3000);settings={...settings,...JSON.parse(localStorage.getItem('mhg_settings')||'{}')}}catch(e){}
+const money=n=>n.toLocaleString('es-AR',{style:'currency',currency:'ARS',maximumFractionDigits:0});
+const save=()=>{localStorage.setItem('mhg_records',JSON.stringify(records));localStorage.setItem('mhg_rate',String(rate));localStorage.setItem('mhg_settings',JSON.stringify(settings))};
+function render(){
+ const month=$('month').value||localDate.slice(0,7),list=records.filter(r=>r.date.startsWith(month));
+ const normal=list.filter(r=>r.kind==='Normal').reduce((a,r)=>a+r.hours,0),repl=list.filter(r=>r.kind==='Reemplazo').reduce((a,r)=>a+r.hours,0),total=normal+repl;
+ $('monthTitle').textContent='Total de '+month;$('monthMoney').textContent=money(total*rate);$('monthHours').textContent=total+' h';$('normalHours').textContent=normal+' h';$('replacementHours').textContent=repl+' h';$('rateLabel').textContent=money(rate);
+ $('entries').innerHTML='';
+ if(!list.length){$('entries').innerHTML='<div class="empty">Todavía no hay horas anotadas en este mes.</div>';return}
+ list.slice().sort((a,b)=>b.date.localeCompare(a.date)||b.id-a.id).forEach(r=>{
+  const el=document.createElement('div');el.className='entry';const left=document.createElement('div'),right=document.createElement('div'),strong=document.createElement('strong'),small=document.createElement('small'),amt=document.createElement('div'),del=document.createElement('button');
+  strong.textContent=r.date+' · '+r.hours+' h';small.textContent=r.kind+(r.detail?' · '+r.detail:'');left.append(strong,small);amt.className='amount';amt.textContent=money(r.hours*rate);del.className='danger';del.textContent='Borrar';del.onclick=()=>{if(confirm('¿Borrar este registro?')){records=records.filter(x=>x.id!==r.id);save();render()}};right.append(amt,del);el.append(left,right);$('entries').append(el);
+ });
+}
+function applySettings(){
+ $('appName').textContent=settings.name||'Mis Horas Gym';$('footerName').textContent=(settings.name||'Mis Horas Gym')+' · Tus datos quedan en este dispositivo.';document.title=settings.name||'Mis Horas Gym';
+ $('appLogo').innerHTML=settings.photo?'<img src="'+settings.photo+'" alt="">':'⏱';
+ $('clockPhoto').src=settings.photo||'';$('clockPhoto').classList.toggle('visible',!!settings.photo);
+ const themes={purple:['#160e25','#241735','#302044','#b68cff','#8ce0b1'],minimal:['#101820','#1c2935','#263746','#9bc8e8','#a8e3c0'],futuristic:['#071b2b','#102b3c','#123e4a','#45e4e8','#8ce0b1'],formal:['#151515','#242424','#333333','#d1b77b','#c9d4c2']};
+ const t=themes[settings.design]||themes.purple;document.documentElement.style.setProperty('--bg',t[0]);document.documentElement.style.setProperty('--panel',t[1]);document.documentElement.style.setProperty('--panel2',t[2]);document.documentElement.style.setProperty('--accent',t[3]);document.documentElement.style.setProperty('--green',t[4]);
+ document.body.style.backgroundImage=settings.background?'linear-gradient(#10101acc,#10101add),url("'+settings.background+'")':'radial-gradient(ellipse at top,#392252 0,#160e25 55%)';
+ $('heroCard').style.backgroundImage=settings.hero?(settings.imageMode==='background'?'linear-gradient(#21152fcc,#21152fcc),url("'+settings.hero+'")':'linear-gradient(#21152fcc,#21152fcc)'):'linear-gradient(135deg,#35224fdd,#21152fee)';
+ $('heroCard').style.setProperty('--hero-image',settings.hero?'url("'+settings.hero+'")':'none');$('heroCard').classList.toggle('foreground',settings.imageMode==='foreground'&&!!settings.hero);$('heroCard').style.setProperty('--overlay',settings.opacity);
+}
+function tick(){const d=new Date();$('clock').textContent=d.toLocaleTimeString('es-AR');$('todayLabel').textContent=d.toLocaleDateString('es-AR',{weekday:'long',day:'numeric',month:'long'});}
+$('add').onclick=()=>{const date=$('date').value,hours=Number($('hours').value),kind=$('kind').value,detail=$('detail').value.trim();if(!date||!Number.isFinite(hours)||hours<=0){alert('Ingresá una fecha y una cantidad de horas válida.');return}records.push({id:Date.now()+Math.random(),date,hours,kind,detail});save();$('hours').value='';$('detail').value='';$('month').value=date.slice(0,7);render()};
+$('month').onchange=render;
+$('menuBtn').onclick=()=>{$('menu').classList.toggle('open');$('menuBtn').setAttribute('aria-expanded',$('menu').classList.contains('open'))};
+document.addEventListener('click',e=>{if(!$('menu').contains(e.target)&&e.target!==$('menuBtn'))$('menu').classList.remove('open')});
+function showPanel(id){$('home').classList.add('panel-hidden');$('personalization').classList.add('panel-hidden');$('dataPanel').classList.add('panel-hidden');$(id).classList.remove('panel-hidden');$('menu').classList.remove('open');window.scrollTo(0,0)}
+$('personalizationBtn').onclick=()=>{loadSettingsForm();showPanel('personalization')};$('dataBtn').onclick=()=>showPanel('dataPanel');$('backHome').onclick=()=>showPanel('home');$('backData').onclick=()=>showPanel('home');
+function loadSettingsForm(){$('customName').value=settings.name;$('imageMode').value=settings.imageMode;$('opacity').value=settings.opacity;document.querySelectorAll('.design').forEach(b=>b.classList.toggle('active',b.dataset.design===settings.design));updatePreview()}
+function updatePreview(){const p=$('previewCard');p.style.backgroundImage=settings.hero?'linear-gradient(#21152f88,#21152f88),url("'+settings.hero+'")':'linear-gradient(135deg,#35224f,#21152f)';p.style.border='1px solid '+(settings.design==='futuristic'?'#45e4e8':settings.design==='formal'?'#d1b77b':'#b68cff');}
+document.querySelectorAll('.design').forEach(b=>b.onclick=()=>{settings.design=b.dataset.design;document.querySelectorAll('.design').forEach(x=>x.classList.toggle('active',x===b));updatePreview()});
+function readImage(file){return new Promise((resolve,reject)=>{if(!file)return resolve('');const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=reject;reader.readAsDataURL(file)})}
+$('photoFile').onchange=async e=>{settings.photo=await readImage(e.target.files[0]);updatePreview()};
+$('bgFile').onchange=async e=>{settings.background=await readImage(e.target.files[0]);updatePreview()};
+$('heroFile').onchange=async e=>{settings.hero=await readImage(e.target.files[0]);updatePreview()};
+$('imageMode').onchange=e=>{settings.imageMode=e.target.value;updatePreview()};$('opacity').oninput=e=>{settings.opacity=Number(e.target.value);updatePreview()};
+$('savePersonalization').onclick=()=>{settings.name=$('customName').value.trim()||'Mis Horas Gym';settings.imageMode=$('imageMode').value;settings.opacity=Number($('opacity').value);save();applySettings();showPanel('home')};
+$('export').onclick=()=>{const blob=new Blob([JSON.stringify({rate,records,settings},null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='mis-horas-gym-respaldo.json';a.click();URL.revokeObjectURL(a.href)};
+$('importBtn').onclick=()=>$('file').click();$('file').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const data=JSON.parse(await f.text());if(!Array.isArray(data.records))throw Error();if(confirm('Esto reemplazará los registros y la personalización actuales. ¿Continuar?')){records=data.records;rate=Number(data.rate)||3000;settings={...settings,...(data.settings||{})};save();applySettings();render();alert('Copia importada correctamente.')}}catch(err){alert('No se pudo leer esa copia.')}e.target.value=''};
+applySettings();render();tick();setInterval(tick,1000);
+</script>
+</body></html>
