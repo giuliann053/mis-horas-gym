@@ -27,12 +27,54 @@ button{border:0;border-radius:13px;padding:13px 15px;font-size:15px;font-weight:
 .toolbar{display:flex;gap:8px;flex-wrap:wrap}.toolbar button{flex:1}.note{font-size:12px;color:var(--muted);line-height:1.5;margin:12px 2px}
 footer{text-align:center;color:var(--muted);font-size:11px;padding:12px}
 @media(max-width:370px){.row{grid-template-columns:1fr}.money{font-size:29px}}
+
+/* Personalización visual */
+:root{--bg:#160e25;--panel:#241735ee;--panel2:#302044;--accent:#b68cff;--accent2:#8d5ce6;--text:#f5efff;--muted:#b9a9cc;--green:#8ce0b1}
+body{background:radial-gradient(ellipse at top,#392252 0,var(--bg) 58%);background-attachment:fixed}
+.card{background:var(--panel);backdrop-filter:blur(10px)}
+.primary{background:linear-gradient(100deg,var(--accent),var(--accent2))}
+input:focus,select:focus{border-color:var(--accent)}
+body.theme-future{font-family:ui-monospace,SFMono-Regular,monospace;background:radial-gradient(ellipse at top,#123b4a 0,#07151f 60%);--bg:#07151f;--panel:#0c2532eF;--panel2:#123747;--accent:#4de6e0;--accent2:#278cc2;--text:#e5ffff;--muted:#9acbd0;--green:#7dffc7}
+body.theme-galaxy{--bg:#100b2c;--panel:#211747ed;--panel2:#30205c;--accent:#c18cff;--accent2:#5d7cff;--text:#f6efff;--muted:#c2b5e7;--green:#8fffd1;background:radial-gradient(circle at 20% 15%,#49317d 0,transparent 28%),radial-gradient(circle at 80% 35%,#1d5270 0,transparent 25%),linear-gradient(145deg,#09071c,#171035 65%,#09071c);background-attachment:fixed}
+body.theme-formal{font-family:Georgia,serif;background:linear-gradient(145deg,#242a32,#101419);--bg:#101419;--panel:#202832f2;--panel2:#303b47;--accent:#d5b77a;--accent2:#9d8050;--text:#f4f0e8;--muted:#c1b8a8;--green:#a8d5b5}
+body.theme-clean{background:#eef0f5;--bg:#eef0f5;--panel:#ffffffed;--panel2:#edf0f7;--accent:#5369c8;--accent2:#354aa5;--text:#202437;--muted:#667085;--green:#18794e;color:var(--text);color-scheme:light}
+body.theme-clean input,body.theme-clean select{background:#f7f8fc;color:#202437;border-color:#d5d9e5}
+body.theme-clean .secondary{background:#e4e8f4;color:#27304d}body.theme-clean .danger{background:#fce7ed;color:#a52243}
+body.theme-clean .card{border-color:#dfe3ed;box-shadow:0 8px 24px #24304a12}
+@keyframes floatGlow{0%,100%{filter:drop-shadow(0 0 3px var(--accent));transform:translateY(0)}50%{filter:drop-shadow(0 0 12px var(--accent));transform:translateY(-2px)}}
+@keyframes drift{0%{background-position:0 0,0 0,0 0}100%{background-position:180px -120px,-140px 160px,0 0}}
+body.motion-on.theme-future .logo,body.motion-on.theme-future .money{animation:floatGlow 3s ease-in-out infinite}
+body.motion-on.theme-galaxy{background-size: auto,auto,220% 220%;animation:drift 28s linear infinite}
+body.motion-on .card{animation:cardIn .45s ease both}
+@keyframes cardIn{from{opacity:.65;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+body.motion-off *,body.motion-off *::before,body.motion-off *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+@media(prefers-reduced-motion:reduce){body.motion-on *,body.motion-on *::before,body.motion-on *::after{animation:none!important;transition:none!important}}
+body.custom-bg{background-image:linear-gradient(#100b1dcc,#100b1dcc),var(--user-bg);background-size:cover;background-position:center;background-attachment:fixed}
+#userVideo{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;opacity:.34;pointer-events:none}
+body.media-soft #userVideo{filter:blur(8px);opacity:.24;transform:scale(1.04)}body.media-subtle #userVideo{opacity:.12}
+body.custom-bg.media-soft{background-blend-mode:normal}body.custom-bg.media-subtle{background-image:linear-gradient(#100b1df0,#100b1df0),var(--user-bg)}
+body.theme-clean #userVideo{opacity:.12}
+.design-tools{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end;margin-top:14px}
+.design-tools button{white-space:nowrap}.design-item{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 0;border-bottom:1px solid #ffffff18}.design-item:last-child{border:0}.design-item strong{display:block}.design-item small{color:var(--muted)}
+.design-actions{display:flex;gap:6px}.design-actions button{padding:8px 10px;font-size:12px}
+
+body.theme-clean.custom-bg{background-image:linear-gradient(#f4f5f7d9,#f4f5f7d9),var(--user-bg)}
+main.layout-compact .card{border-radius:12px;padding:13px;margin:8px 0}
+main.layout-compact .top{margin-bottom:12px}main.layout-compact .stats{grid-template-columns:repeat(4,minmax(0,1fr))}main.layout-compact .stat{padding:9px}main.layout-compact .stat b{font-size:17px}
+main.layout-editorial{max-width:760px}main.layout-editorial .top{padding:14px 18px;border-bottom:1px solid #ffffff25}
+main.layout-editorial #summary{border-left:5px solid var(--accent)}
+main.layout-editorial #entryCard{max-width:560px}
+main.layout-focus #entryCard{order:1}main.layout-focus #summary{order:2}main.layout-focus #appearance{order:3}main.layout-focus #settings{order:4}main.layout-focus #history{order:5}main.layout-focus #backup{order:6}
+main.layout-dashboard #summary{order:1}main.layout-dashboard #entryCard{order:2}main.layout-dashboard #appearance{order:3}main.layout-dashboard #settings{order:4}main.layout-dashboard #history{order:5}main.layout-dashboard #backup{order:6}
+.colorline{display:flex;align-items:center;gap:10px}.colorline input[type=color]{width:58px;height:44px;padding:4px}.preview-chip{display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--accent);vertical-align:middle}
+@media(max-width:390px){main.layout-compact .stats{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
+<video id="userVideo" autoplay muted loop playsinline hidden></video>
 <main>
  <header class="top"><div class="logo">⏱</div><div><h1>Mis Horas Gym</h1><div class="sub">Tus horas, tus cuentas, todo claro 💜</div></div></header>
- <section class="card">
+ <section class="card" id="summary">
   <div class="eyebrow" id="monthTitle">Total del mes</div>
   <div class="money" id="monthMoney">$0</div>
   <div class="stats">
@@ -42,7 +84,7 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:12px}
    <div class="stat"><small>Pago por hora</small><b id="rateLabel">$3.000</b></div>
   </div>
  </section>
- <section class="card">
+ <section class="card" id="entryCard">
   <h2>＋ Anotar horas</h2>
   <div class="row">
    <div><label for="date">Fecha</label><input id="date" type="date"></div>
@@ -53,17 +95,45 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:12px}
   <label for="detail">Detalle (opcional)</label><input id="detail" maxlength="80" placeholder="Ej. Reemplazo de Axel">
   <button class="primary" id="add">Guardar registro</button>
  </section>
- <section class="card">
+ <section class="card" id="appearance">
+  <h2>🎨 Personalizar apariencia</h2>
+  <label for="theme">Diseño visual</label>
+  <select id="theme"><option value="violet">Violeta clásico</option><option value="future">Futurista animado</option><option value="galaxy">Galaxia animada</option><option value="clean">Ordenado y minimalista</option><option value="formal">Formal y elegante</option></select>
+  <label for="motion">Movimiento de la interfaz</label><select id="motion"><option value="on">Animaciones activadas</option><option value="off">Sin animaciones</option></select>
+  <label for="layout">Distribución de los elementos</label>
+  <select id="layout"><option value="dashboard">Panel: resumen primero</option><option value="focus">Registro primero</option><option value="compact">Compacto: todo más junto</option><option value="editorial">Amplio: estilo formal</option></select>
+  <label for="accent">Color principal</label><div class="colorline"><input id="accent" type="color" value="#b68cff"><span class="note">Elegí el color de botones y detalles.</span></div>
+  <label for="wallpaper">Foto o GIF de fondo</label><input id="wallpaper" type="file" accept="image/*,.gif,.webp">
+  <label for="videoBg">Video de fondo (opcional)</label><input id="videoBg" type="file" accept="video/mp4,video/webm,video/*">
+  <label for="mediaMode">Cómo mostrar el fondo</label><select id="mediaMode"><option value="cover">Cubrir toda la pantalla</option><option value="soft">Suave y desenfocado</option><option value="subtle">Tenue detrás del contenido</option></select>
+  <div id="mediaPreview" class="note">Todavía no elegiste una foto o video.</div>
+  <div class="toolbar"><button class="secondary" id="removeWallpaper" type="button">Quitar foto</button><button class="secondary" id="resetLook" type="button">Restablecer diseño</button></div>
+  <p class="note">Los diseños cambian colores, tipografía, espacios y posición de las secciones. La foto, GIF o video se guarda solo en este navegador; usá archivos livianos.</p>
+  <div class="divider-note" style="height:1px;background:#ffffff20;margin:16px 0"></div>
+  <h2>💾 Mis diseños guardados</h2>
+  <label for="designName">Nombre para este diseño</label>
+  <div class="design-tools"><input id="designName" maxlength="30" placeholder="Ej. Galaxia violeta"><button class="secondary" id="saveDesign" type="button">Guardar diseño</button></div>
+  <div id="savedDesigns" class="note" aria-live="polite">Todavía no guardaste diseños propios.</div>
+  <p class="note">Podés guardar varios estilos y volver a aplicarlos cuando quieras. Cada diseño conserva sus colores, distribución, animaciones y su propio fondo si tiene uno.</p>
+ </section>
+ <section class="card" id="settings">
   <h2>⚙️ Configuración</h2>
   <label for="rate">Pago por hora ($)</label><input id="rate" type="number" min="0" step="100" value="3000">
   <label for="month">Consultar otro mes</label><input id="month" type="month">
   <p class="note">El pago se calcula multiplicando las horas registradas por el valor por hora. Cambiar el valor actualiza también los totales de los meses anteriores.</p>
  </section>
- <section class="card">
+ <section class="card" id="history">
   <h2>📋 Registros del mes</h2>
   <div id="entries"><div class="empty">Todavía no hay horas anotadas en este mes.</div></div>
  </section>
- <section class="card">
+ <section class="card" id="cloud">
+  <h2>☁️ Copia en tu cuenta de Google</h2>
+  <p class="note">Conectá tu cuenta para sincronizar tus horas y recuperarlas en otro teléfono. Esta función necesita configurar un proyecto gratuito de Firebase.</p>
+  <div id="cloudStatus" class="note" aria-live="polite">Google todavía no está configurado.</div>
+  <button class="primary" id="googleLogin" type="button">Continuar con Google</button>
+  <button class="secondary" id="googleLogout" type="button" style="width:100%;margin-top:8px;display:none">Cerrar sesión</button>
+ </section>
+ <section class="card" id="backup">
   <h2>Respaldo de tus datos</h2>
   <div class="toolbar"><button class="secondary" id="export">Exportar copia</button><button class="secondary" id="importBtn">Importar copia</button></div>
   <input id="file" type="file" accept="application/json" hidden>
@@ -78,6 +148,84 @@ $('date').value=localDate;$('month').value=localDate.slice(0,7);
 let records=[];let rate=3000;
 try{records=JSON.parse(localStorage.getItem('mhg_records')||'[]');rate=Number(localStorage.getItem('mhg_rate')||3000)}catch(e){}
 $('rate').value=rate;
+// Medios personalizados: se guardan como archivos en IndexedDB para no llenar localStorage.
+const mediaDB=new Promise((resolve,reject)=>{const req=indexedDB.open('MisHorasGymMedia',1);req.onupgradeneeded=()=>req.result.createObjectStore('media');req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)});
+async function mediaSet(key,blob){const db=await mediaDB;return new Promise((res,rej)=>{const tx=db.transaction('media','readwrite');tx.objectStore('media').put(blob,key);tx.oncomplete=res;tx.onerror=()=>rej(tx.error)})}
+async function mediaGet(key){const db=await mediaDB;return new Promise((res,rej)=>{const q=db.transaction('media').objectStore('media').get(key);q.onsuccess=()=>res(q.result||null);q.onerror=()=>rej(q.error)})}
+async function mediaDelete(key){const db=await mediaDB;return new Promise((res,rej)=>{const tx=db.transaction('media','readwrite');tx.objectStore('media').delete(key);tx.oncomplete=res;tx.onerror=()=>rej(tx.error)})}
+let mediaUrls=[];
+const pref=(k,d)=>localStorage.getItem('mhg_'+k)||d;
+function applyLook(){
+ const theme=pref('theme','violet'),layout=pref('layout','dashboard'),accent=pref('accent','#b68cff'),wall=pref('wallpaper',''),motion=pref('motion','on'),mediaMode=pref('mediaMode','cover');
+ document.body.classList.remove('theme-future','theme-galaxy','theme-clean','theme-formal','custom-bg','motion-on','motion-off','media-soft','media-subtle');
+ document.body.classList.add('motion-'+motion);
+ if(theme!=='violet')document.body.classList.add('theme-'+theme);
+ if(wall){document.body.classList.add('custom-bg');document.body.style.setProperty('--user-bg',`url("${wall}")`)}else document.body.style.removeProperty('--user-bg');
+ if(mediaMode!=='cover')document.body.classList.add('media-'+mediaMode);$('mediaMode').value=mediaMode;
+ document.documentElement.style.setProperty('--accent',accent);
+ document.documentElement.style.setProperty('--accent2',accent);
+ document.querySelector('main').classList.remove('layout-compact','layout-editorial','layout-focus','layout-dashboard');
+ document.querySelector('main').classList.add('layout-'+layout);
+ $('theme').value=theme;$('layout').value=layout;$('accent').value=accent;$('motion').value=motion;
+}
+$('theme').onchange=()=>{localStorage.setItem('mhg_theme',$('theme').value);applyLook()};
+$('motion').onchange=()=>{localStorage.setItem('mhg_motion',$('motion').value);applyLook()};
+$('layout').onchange=()=>{localStorage.setItem('mhg_layout',$('layout').value);applyLook()};
+$('accent').oninput=()=>{localStorage.setItem('mhg_accent',$('accent').value);applyLook()};
+$('wallpaper').onchange=async e=>{
+ const file=e.target.files[0];if(!file)return;
+ if(!file.type.startsWith('image/')){alert('Elegí una imagen, GIF o WebP.');return}
+ try{await mediaSet('background',file);localStorage.setItem('mhg_wallpaper_kind','image');await applyMedia();alert('¡Foto o GIF guardado!')}catch(err){alert('No se pudo guardar. Probá con un archivo más liviano.')}
+ e.target.value='';
+};
+$('videoBg').onchange=async e=>{
+ const file=e.target.files[0];if(!file)return;
+ if(!file.type.startsWith('video/')){alert('Elegí un video.');return}
+ if(file.size>30*1024*1024){alert('El video debe pesar 30 MB o menos para guardarlo en el teléfono.');e.target.value='';return}
+ try{await mediaSet('background',file);localStorage.setItem('mhg_wallpaper_kind','video');await applyMedia();alert('¡Video de fondo guardado!')}catch(err){alert('No se pudo guardar ese video.')}
+ e.target.value='';
+};
+$('mediaMode').onchange=()=>{localStorage.setItem('mhg_mediaMode',$('mediaMode').value);applyLook();applyMedia()};
+async function applyMedia(){
+ const video=$('userVideo');mediaUrls.forEach(URL.revokeObjectURL);mediaUrls=[];
+ const kind=pref('wallpaper_kind','');let blob=null;try{blob=await mediaGet('background')}catch(e){}
+ video.pause();video.removeAttribute('src');video.hidden=true;document.body.classList.remove('custom-bg');document.body.style.removeProperty('--user-bg');
+ if(!blob){$('mediaPreview').textContent='Todavía no elegiste una foto o video.';return}
+ const url=URL.createObjectURL(blob);mediaUrls.push(url);
+ if(kind==='video'){video.src=url;video.hidden=false;video.load();video.play().catch(()=>{});$('mediaPreview').textContent='Video de fondo activo.'}
+ else{document.body.classList.add('custom-bg');document.body.style.setProperty('--user-bg',`url("${url}")`);$('mediaPreview').textContent='Foto/GIF de fondo activo.'}
+}
+// Diseños personales: cada uno conserva sus ajustes y, si corresponde, su propio fondo.
+const designsKey='mhg_saved_designs';
+const readDesigns=()=>{try{return JSON.parse(localStorage.getItem(designsKey)||'[]')}catch(e){return[]}};
+function renderDesigns(){
+ const host=$('savedDesigns'),items=readDesigns();host.innerHTML='';
+ if(!items.length){host.textContent='Todavía no guardaste diseños propios.';return}
+ items.forEach(d=>{
+  const row=document.createElement('div');row.className='design-item';
+  const info=document.createElement('div'),name=document.createElement('strong'),meta=document.createElement('small');
+  name.textContent=d.name;meta.textContent=(d.theme||'violet')+' · '+(d.wallpaperKind==='video'?'con video':d.wallpaperKind==='image'?'con foto/GIF':'sin fondo');info.append(name,meta);
+  const actions=document.createElement('div');actions.className='design-actions';
+  const use=document.createElement('button');use.className='secondary';use.textContent='Aplicar';use.onclick=async()=>{
+   ['theme','layout','accent','motion','mediaMode'].forEach(k=>localStorage.setItem('mhg_'+k,d[k]));
+   if(d.hasBackground){const blob=await mediaGet('design_'+d.id);if(blob){await mediaSet('background',blob);localStorage.setItem('mhg_wallpaper_kind',d.wallpaperKind)}}
+   else{await mediaDelete('background');localStorage.removeItem('mhg_wallpaper_kind')}
+   applyLook();await applyMedia();alert('Diseño «'+d.name+'» aplicado.');
+  };
+  const del=document.createElement('button');del.className='danger';del.textContent='Borrar';del.onclick=async()=>{if(!confirm('¿Borrar el diseño «'+d.name+'»?'))return;await mediaDelete('design_'+d.id);localStorage.setItem(designsKey,JSON.stringify(readDesigns().filter(x=>x.id!==d.id)));renderDesigns()};
+  actions.append(use,del);row.append(info,actions);host.append(row);
+ });
+}
+$('saveDesign').onclick=async()=>{
+ const name=$('designName').value.trim();if(!name){alert('Escribí un nombre para tu diseño.');$('designName').focus();return}
+ const id=String(Date.now());const kind=pref('wallpaper_kind','');let blob=null;try{blob=await mediaGet('background')}catch(e){}
+ const d={id,name,theme:$('theme').value,layout:$('layout').value,accent:$('accent').value,motion:$('motion').value,mediaMode:$('mediaMode').value,wallpaperKind:kind,hasBackground:!!blob};
+ try{if(blob)await mediaSet('design_'+id,blob);const all=readDesigns();all.push(d);localStorage.setItem(designsKey,JSON.stringify(all));$('designName').value='';renderDesigns();alert('¡Diseño guardado! Ya podés aplicarlo cuando quieras.')}catch(e){alert('No se pudo guardar. Puede faltar espacio en el teléfono.')}
+};
+renderDesigns();
+$('removeWallpaper').onclick=async()=>{await mediaDelete('background');localStorage.removeItem('mhg_wallpaper_kind');$('wallpaper').value='';$('videoBg').value='';await applyMedia();applyLook()};
+$('resetLook').onclick=()=>{['theme','layout','accent','wallpaper','motion','mediaMode'].forEach(k=>localStorage.removeItem('mhg_'+k));applyLook()};
+applyLook();applyMedia();
 const money=n=>n.toLocaleString('es-AR',{style:'currency',currency:'ARS',maximumFractionDigits:0});
 const save=()=>{localStorage.setItem('mhg_records',JSON.stringify(records));localStorage.setItem('mhg_rate',String(rate))};
 function render(){
@@ -113,6 +261,39 @@ $('export').onclick=()=>{const blob=new Blob([JSON.stringify({rate,records},null
 $('importBtn').onclick=()=>$('file').click();
 $('file').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const data=JSON.parse(await f.text());if(!Array.isArray(data.records))throw Error();if(confirm('Esto reemplazará los registros actuales. ¿Continuar?')){records=data.records;rate=Number(data.rate)||3000;$('rate').value=rate;save();render();alert('Copia importada correctamente.')}}catch(err){alert('No se pudo leer esa copia.')}e.target.value=''};
 if('serviceWorker' in navigator && location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
+// Sincronización opcional con Firebase. Requiere completar firebaseConfig en este archivo.
+const firebaseConfig={apiKey:"PEGAR_API_KEY",authDomain:"TU-PROYECTO.firebaseapp.com",projectId:"TU-PROYECTO",appId:"PEGAR_APP_ID"};
+let cloudUser=null,cloudDb=null,cloudAuth=null,cloudFns=null,cloudReady=false,cloudTimer=null;
+const cloudStatus=(msg)=>$('cloudStatus').textContent=msg;
+async function initCloud(){
+ if(cloudReady)return true;
+ if(firebaseConfig.apiKey.startsWith('PEGAR_')||firebaseConfig.projectId==='TU-PROYECTO'){cloudStatus('Falta conectar Firebase. Seguí la guía LEEME para activar el guardado con Google.');return false}
+ try{
+  const appMod=await import('https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js');
+  const authMod=await import('https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js');
+  const fsMod=await import('https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js');
+  const app=appMod.initializeApp(firebaseConfig);cloudAuth=authMod.getAuth(app);cloudDb=fsMod.getFirestore(app);cloudFns={...authMod,...fsMod};cloudReady=true;
+  authMod.onAuthStateChanged(cloudAuth,async user=>{cloudUser=user;$('googleLogin').style.display=user?'none':'block';$('googleLogout').style.display=user?'block':'none';if(user){cloudStatus('Conectado como '+(user.email||'tu cuenta Google')+'. Sincronizando…');await pullCloud()}else cloudStatus('No hay una cuenta Google conectada.')});
+  return true;
+ }catch(e){cloudStatus('No se pudo iniciar la conexión. Revisá la configuración de Firebase y tu conexión.');return false}
+}
+async function pullCloud(){
+ try{const {doc,getDoc,setDoc}=cloudFns,ref=doc(cloudDb,'users',cloudUser.uid),snap=await getDoc(ref);
+  if(snap.exists()){
+   const data=snap.data();const cloudRecords=Array.isArray(data.records)?data.records:[];
+   const merged=new Map();[...cloudRecords,...records].forEach(r=>merged.set(String(r.id),r));records=[...merged.values()];
+   if(!localStorage.getItem('mhg_rate')&&data.rate)rate=Number(data.rate);
+   $('rate').value=rate;saveLocalOnly();await setDoc(ref,{records,rate,updatedAt:Date.now()},{merge:true});render();cloudStatus('Sincronizado con Google · '+(cloudUser.email||'cuenta conectada'));
+  }else{await pushCloud();cloudStatus('Copia inicial guardada en Google · '+(cloudUser.email||''))}
+ }catch(e){cloudStatus('No se pudo leer la copia de Google. Revisá las reglas de Firestore.')}
+}
+function saveLocalOnly(){localStorage.setItem('mhg_records',JSON.stringify(records));localStorage.setItem('mhg_rate',String(rate))}
+async function pushCloud(){if(!cloudUser||!cloudReady)return;try{const {doc,setDoc}=cloudFns;await setDoc(doc(cloudDb,'users',cloudUser.uid),{records,rate,updatedAt:Date.now()},{merge:true});cloudStatus('Guardado en Google · '+(cloudUser.email||'cuenta conectada'))}catch(e){cloudStatus('No se pudo guardar en Google. Tus datos siguen en este teléfono; revisá Firestore.') }}
+const originalSave=save;save=()=>{originalSave();if(cloudUser){clearTimeout(cloudTimer);cloudTimer=setTimeout(pushCloud,700)}};
+$('googleLogin').onclick=async()=>{if(!await initCloud())return;try{const provider=new cloudFns.GoogleAuthProvider();await cloudFns.signInWithPopup(cloudAuth,provider)}catch(e){cloudStatus('No se pudo iniciar sesión. Probá de nuevo desde Chrome.') }};
+$('googleLogout').onclick=async()=>{if(cloudAuth)await cloudFns.signOut(cloudAuth)};
+// Inicializa solo si ya se completó la configuración, sin mostrar errores al usar la app sin nube.
+if(!firebaseConfig.apiKey.startsWith('PEGAR_'))initCloud();
 render();
 </script>
 </body></html>
